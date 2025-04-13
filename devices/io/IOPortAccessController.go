@@ -277,7 +277,7 @@ func (r *IOPortAccessController) WriteAddr8(port_addr uint16, value uint8) {
 			return
 		}
 
-		log.Println("Unhandled IO port write: PORT=[%#04x], value=%#02x", port_addr, value)
+		log.Printf("Unhandled IO port write: PORT=[%#04x], value=%#02x\n", port_addr, value)
 	}
 }
 

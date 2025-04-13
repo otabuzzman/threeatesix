@@ -184,8 +184,8 @@ func INSTR_JMP_FAR_M16(core *CpuCore) {
 		// core.registers.CS.Base = uint32(segment) << 4
 		core.flags.IsFarJump = true
 
-		core.logInstruction(fmt.Sprintf("[%#04x] JMP %s (dst=%#04x:%#04x)",
-			core.GetCurrentlyExecutingInstructionAddress(), addrName, addrName))
+		core.logInstruction(fmt.Sprintf("[%#04x] JMP %s (JMP_FAR_M16)",
+			core.GetCurrentlyExecutingInstructionAddress(), addrName))
 		return
 	} else if addrMode == ADR_TYPE_INDIRECT {
 		// Read the offset (IP) and segment (CS) from memory
@@ -230,10 +230,9 @@ func INSTR_JMP_NEAR_REL16(core *CpuCore) {
 }
 
 func INSTR_CALL_NEAR_REL16(core *CpuCore) {
-
 	// Get the current IP and read the offset
 	currentIP := core.GetIP()
-	offset, err := core.readImm16()
+	offset, err := core.memoryAccessController.ReadMemoryValue16(uint32(core.GetCurrentCodePointer()) + 1)
 
 	// Calculate the address after the instruction and the destination address
 	nextIP := currentIP + 3                           // Size of this CALL instruction

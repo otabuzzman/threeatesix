@@ -12,7 +12,7 @@ func Test_MovTests(t *testing.T) {
 	testPc.GetMemoryController().UnlockBootVector()
 
 	testPc.GetPrimaryCpu().SetCS(0x0)
-	testPc.GetPrimaryCpu().SetIP(1)
+	testPc.GetPrimaryCpu().SetIP(0)
 
 	instructions := []uint8{0xb8, 0x00, 0x90, 0x8E, 0xD8}
 
@@ -35,7 +35,7 @@ func Test_MovDecodeOperandSizeOverridePrefix(t *testing.T) {
 	testPc.GetMemoryController().UnlockBootVector()
 
 	testPc.GetPrimaryCpu().SetCS(0x0)
-	testPc.GetPrimaryCpu().SetIP(1)
+	testPc.GetPrimaryCpu().SetIP(0)
 
 	instructions := []uint8{0x66, 0x25, 0xFF, 0xFF, 0xFF, 0x9F}
 
